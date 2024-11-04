@@ -3,30 +3,44 @@ let currentPage = 1;
 let totalPages = 1;
 
 async function fetchCards(page) {
-    try {
-        const response = await fetch(`${apiUrl}?page=${page}`);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const data = await response.json();
-        totalPages = data.totalPages;
-        displayCards(data.cards);
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
+try {
+const response = await fetch(`${apiUrl}?page=${page}`);
+if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+const data = await response.json();
+totalPages = data.totalPages;
+displayCards(data.cards);
+} catch (error) {
+console.error('Error fetching data:', error);
+}
 }
 
 function displayCards(cards) {
-    const cardContainer = document.getElementById('card-container');
-    cardContainer.innerHTML = ''; // Clear previous cards
-    cards.forEach(card => {
-        const cardElement = document.createElement('div');
-        cardElement.innerHTML = `
-            <h2>${card.name}</h2>
-            <img src="${card.images.small}" alt="${card.name}">
-            <p>Type: ${card.types.join(', ')}</p>
-        `;
-        cardContainer.appendChild(cardElement);
-    });
+const cardContainer = document.getElementById('card-container');
+cardContainer.innerHTML = ''; // Clear previous cards
+cards.forEach(card => {
+const cardElement = document.createElement('div');
+cardElement.innerHTML = `
+<h2>${card.name}</h2>
+<img src="${card.images.small}" alt="${card.name}">
+<p>Type: ${card.types.join(', ')}</p>
+`;
+cardContainer.appendChild(cardElement);
+});
 }
+
+document.getElementById('next').addEventListener('click', () => {
+if (currentPage < totalPages) {
+currentPage++;
+fetchCards(currentPage);
+}
+});
+
+document.getElementById('prev').addEventListener('click', () => {
+if (currentPage > 1) {
+currentPage--;
+fetchCards(currentPage);
+}
+});
 
 // Initial fetch
 fetchCards(currentPage);
