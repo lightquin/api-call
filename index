@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokémon Trading Card Game(TCG) API</title>
+    <title>Pokémon TCG Cards</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="app">
-        <h1>Pokémon TCG Cards</h1>
-        <input type="text" id="search" placeholder="Search for a card...">
-        <div id="card-container"></div>
-        <div id="pagination">
-            <button id="prev" disabled>Previous</button>
-            <button id="next">Next</button>
-        </div>
+        <header>
+            <h1>Pokémon TCG Cards</h1>
+            <input type="text" id="search" placeholder="Search for a card...">
+        </header>
+        <main id="card-container"></main>
+        <footer id="pagination">
+            <button id="prevBtn">Previous</button>
+            <button id="nextBtn">Next</button>
+        </footer>
     </div>
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
